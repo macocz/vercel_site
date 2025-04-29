@@ -7,23 +7,32 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            padding-top: 100px;
+            padding-top: 80px;
             background-color: #fef3e2;
         }
 
         h1 {
             font-size: 48px;
+            margin-bottom: 20px;
         }
 
         #timer {
             font-size: 36px;
-            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        img {
+            max-width: 90%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
     </style>
 </head>
 <body>
     <h1>Grill p64 🍖</h1>
     <div id="timer">Odliczanie...</div>
+    <img src="grill.jpg" alt="Grill">
 
     <script>
         function getTomorrowAt20() {
@@ -54,7 +63,7 @@
         }
 
         const timerInterval = setInterval(updateTimer, 1000);
-        updateTimer(); // uruchom od razu
+        updateTimer();
     </script>
 </body>
 </html>
