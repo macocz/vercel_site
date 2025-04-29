@@ -1,1 +1,1 @@
-Strona testowa vercel
+Siema z tej strony dzordzo 
