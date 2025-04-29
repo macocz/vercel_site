@@ -16,57 +16,75 @@
             margin-bottom: 20px;
         }
 
-        #timer {
-            font-size: 36px;
-            margin-bottom: 30px;
-        }
-
         img {
             max-width: 90%;
             height: auto;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
+
+        .tabs {
+            margin-top: 40px;
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #ffb347;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .tab-button:hover {
+            background-color: #ffa07a;
+        }
+
+        .tab-content {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
     <h1>Grill p64 🍖</h1>
-    <div id="timer">Odliczanie...</div>
     <img src="grill.jpg" alt="Grill">
 
-    <iframe src="https://player.kick.com/franio" height="720" width="1280" frameborder="0" scrolling="no" allowfullscreen="true"></iframe>
-    <iframe src="https://player.kick.com/azdus" height="720" width="1280" frameborder="0" scrolling="no" allowfullscreen="true"></iframe>
+    <div class="tabs">
+        <button class="tab-button" onclick="showTab('franio')">Franio</button>
+        <button class="tab-button" onclick="showTab('azdus')">Azdus</button>
+
+        <div id="franio" class="tab-content">
+            <iframe src="https://player.kick.com/franio" height="720" width="1280" frameborder="0" scrolling="no" allowfullscreen="true"></iframe>
+        </div>
+
+        <div id="azdus" class="tab-content">
+            <iframe src="https://player.kick.com/azdus" height="720" width="1280" frameborder="0" scrolling="no" allowfullscreen="true"></iframe>
+        </div>
+    </div>
 
     <script>
-        function getTomorrowAt20() {
-            const now = new Date();
-            const tomorrow = new Date(now);
-            tomorrow.setDate(now.getDate() + 1);
-            tomorrow.setHours(20, 0, 0, 0);
-            return tomorrow;
-        }
+        function showTab(tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
 
-        const countdownTarget = getTomorrowAt20();
-
-        function updateTimer() {
-            const now = new Date();
-            const distance = countdownTarget - now;
-
-            if (distance <= 0) {
-                document.getElementById("timer").innerHTML = "Czas na GRILLA! 🔥";
-                clearInterval(timerInterval);
-                return;
+            const activeTab = document.getElementById(tabId);
+            if (activeTab) {
+                activeTab.classList.add('active');
             }
-
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("timer").innerHTML = `${hours}h ${minutes}m ${seconds}s`;
         }
 
-        const timerInterval = setInterval(updateTimer, 1000);
-        updateTimer();
+        window.onload = function() {
+            showTab('franio');
+        };
     </script>
 </body>
 </html>
